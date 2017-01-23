@@ -58,6 +58,14 @@ public class KthLargestInNArrays {
 		for (int i = 0; i < n; i++) {
 			// sorted in ascending order
 			Arrays.sort(arrays[i]);
+			
+			// put maximum value from each array into max heap
+			if (arrays[i].length > 0){
+				int fromId = i;
+				int index = arrays[i].length - 1;
+				int maxVal = arrays[i][index];
+				maxHeap.add(new Node(maxVal, fromId, index));
+			}
 		}
 		
 		
