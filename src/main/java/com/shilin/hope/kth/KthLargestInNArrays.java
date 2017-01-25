@@ -16,6 +16,16 @@ import java.util.Queue;
  *
  */
 
+/**
+ * Example In n=2 arrays [[9,3,2,4,7],[1,2,3,4,8]], the 3rd largest element is
+ * 7.
+ * 
+ * In n=2 arrays [[9,3,2,4,8],[1,2,3,4,2]], the 1st largest element is 9, 2nd
+ * largest element is 8, 3rd largest element is 7 and etc.
+ * 
+ *
+ */
+
 public class KthLargestInNArrays {
 
 	class Node {
@@ -38,7 +48,6 @@ public class KthLargestInNArrays {
 	 */
 	public int KthInArrays(int[][] arrays, int k) {
 
-
 		Queue<Node> maxHeap = new PriorityQueue<Node>(k, new Comparator<Node>() {
 			// descending ordering !
 			public int compare(Node o1, Node o2) {
@@ -51,25 +60,38 @@ public class KthLargestInNArrays {
 			}
 
 		});
-		
+
 		// number of input arrays
 		int n = arrays.length;
 
 		for (int i = 0; i < n; i++) {
 			// sorted in ascending order
 			Arrays.sort(arrays[i]);
-			
+
 			// put maximum value from each array into max heap
-			if (arrays[i].length > 0){
+			if (arrays[i].length > 0) {
 				int fromId = i;
 				int index = arrays[i].length - 1;
 				int maxVal = arrays[i][index];
 				maxHeap.add(new Node(maxVal, fromId, index));
 			}
 		}
-		
-		
 
-		return -99;
+		int i = 0;
+		int ans = -99;
+
+		while (i < k ) {
+			Node maxNode = maxHeap.poll();
+			ans = maxNode.value;
+			int fromId = maxNode.from_id;
+			// get the index of the next greatest in this array
+			int index = --maxNode.index;
+			if (index >= 0)
+				maxHeap.add(new Node(arrays[fromId][index], fromId, index));
+
+			i++;
+		}
+
+		return ans;
 	}
 }
