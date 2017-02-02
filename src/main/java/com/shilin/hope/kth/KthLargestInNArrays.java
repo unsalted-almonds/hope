@@ -1,7 +1,10 @@
 package com.shilin.hope.kth;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -80,7 +83,7 @@ public class KthLargestInNArrays {
 		int i = 0;
 		int ans = -99;
 
-		while (i < k ) {
+		while (i < k) {
 			Node maxNode = maxHeap.poll();
 			ans = maxNode.value;
 			int fromId = maxNode.from_id;
@@ -94,4 +97,23 @@ public class KthLargestInNArrays {
 
 		return ans;
 	}
+
+	public int KthInArraysEasy(int[][] arrays, int k) {
+		// Write your code here
+
+		List<Integer> allElements = new ArrayList<Integer>();
+
+		for (int i = 0; i < arrays.length; i++) {
+
+			for (int j : arrays[i]) {
+				allElements.add(j);
+			}
+
+		}
+
+		Collections.sort(allElements, Collections.reverseOrder());
+
+		return allElements.get(k - 1);
+	}
+
 }
