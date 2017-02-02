@@ -49,6 +49,10 @@ public class KthLargestInNArrays {
 	 *            an integer
 	 * @return an integer, K-th largest element in N arrays
 	 */
+
+	// this is the hard way to do it, it has its merits that it may use a lot
+	// less space. this could help in situations such as distributed and
+	// others...
 	public int KthInArrays(int[][] arrays, int k) {
 
 		Queue<Node> maxHeap = new PriorityQueue<Node>(k, new Comparator<Node>() {
