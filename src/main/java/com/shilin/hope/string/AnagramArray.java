@@ -51,6 +51,9 @@ public class AnagramArray {
 			// cool !!!
 			String anagramKey = new String(count);
 			
+			// if useing int[]
+			// java.util.Arrays.toString(int[]) !!!
+			
 			if (anagramMap.containsKey(anagramKey)){
 				anagramMap.get(anagramKey).add(str);
 			}else{
