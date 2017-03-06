@@ -23,8 +23,12 @@ public class LCS {
 	 */
 	public int longestCommonSubstring(String A, String B) {
 		// write your code here
+		if (A == null || B == null){
+			return 0;
+		}
 		
 		
-		return -99;
+		
+		return 0;
 	}
 }
