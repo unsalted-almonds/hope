@@ -8,6 +8,9 @@ public class LCP {
 	 */
 	
 	// this one needs to be refactored to look better
+	
+	// try a simple word by word comparison 
+	
 	public String longestCommonPrefix(String[] strs) {
 		// write your code here
 
@@ -46,4 +49,32 @@ public class LCP {
 		return strs[0].substring(0, i + 1);
 
 	}
+	
+    public String longestCommonPrefixBetter(String[] strs) {
+        // write your code here
+        
+        if (strs == null || strs.length == 0){
+            return "";
+        }
+        
+        String prefix = strs[0];
+        
+        for (int i = 1; i < strs.length; i++){
+            
+            int j = 0;
+            for (j = 0; j < prefix.length() && j < strs[i].length(); j++){
+                if (prefix.charAt(j) != strs[i].charAt(j)){
+                    break;
+                }
+            }
+            if (j == 0){
+                return "";
+            }
+            prefix = prefix.substring(0,j);
+        }
+        
+        return prefix;
+        
+    }
+	
 }
