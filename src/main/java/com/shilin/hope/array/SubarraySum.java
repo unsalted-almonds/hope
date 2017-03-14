@@ -14,6 +14,8 @@ import java.util.Map;
  * @author Shilin
  *
  */
+
+// this is interesting and not very obvious at first glance. good way of thinking and observing patterns and stuff.
 public class SubarraySum {
 	/**
 	 * @param nums:
@@ -40,7 +42,8 @@ public class SubarraySum {
 		// [-3, -2, 0, -3, 1]
 
 		Map<Integer, Integer> sumMap = new HashMap<Integer, Integer>();
-
+		
+		// when zero appears, it means it starts from the very beginning, and -1 here is for using the algorithm
 		sumMap.put(0, -1);
 
 		int sum = 0;
