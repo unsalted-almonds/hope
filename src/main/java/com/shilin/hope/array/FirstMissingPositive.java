@@ -36,7 +36,9 @@ public class FirstMissingPositive {
                 
                 A[A[i] - 1] = A[i];
                 
-                
+                // worst case, it adjust position for n elements
+                // if it happens, then the loop for other elements would not need to enter while loop
+                // so amortized worst case is still O(n)
                 while (tmp > 0 && tmp <= A.length && A[tmp - 1] != tmp){
                     int tmp1 = A[tmp - 1];
                     A[tmp - 1] = tmp;
