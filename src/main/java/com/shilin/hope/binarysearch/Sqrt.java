@@ -60,6 +60,29 @@ public class Sqrt {
             }
         }
         
+        // another way to do it
+        
+//        int ans = 0;
+//        
+//        while (left <= right) {
+//        	
+//        	mid = (left + right)/2;
+//        	
+//        	if (mid * mid == x) {
+//        		return (int) mid;
+//        	} else if (mid * mid > x) {
+//        		right = mid - 1;
+//        	} else {
+//        		left = mid + 1;
+//        		ans = (int) mid;
+//        	}
+//        	
+//        	
+//        	
+//        }
+//        
+//        return ans;
+        
         return (int)mid;
         
         
