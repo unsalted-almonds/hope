@@ -44,6 +44,7 @@ public class FirstBadVersion {
         
         int exit = 0;
         
+        // don't do +1 inside loop. otherwise this may result in overflow
         while (left + 1 < right) {
             
             int mid = left + (right - left) / 2;
