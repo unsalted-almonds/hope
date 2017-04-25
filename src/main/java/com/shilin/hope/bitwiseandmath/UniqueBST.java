@@ -1,4 +1,4 @@
-package com.shilin.hope.bitwise;
+package com.shilin.hope.bitwiseandmath;
 
 /**
  * Given n, how many structurally unique BSTs (binary search trees) that store values 1...n?

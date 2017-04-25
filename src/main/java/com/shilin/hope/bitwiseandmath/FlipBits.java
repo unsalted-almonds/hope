@@ -1,4 +1,4 @@
-package com.shilin.hope.bitwise;
+package com.shilin.hope.bitwiseandmath;
 
 /**
  * Determine the number of bits required to flip if you want to convert integer

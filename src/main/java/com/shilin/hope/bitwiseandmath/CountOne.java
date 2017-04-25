@@ -1,4 +1,4 @@
-package com.shilin.hope.bitwise;
+package com.shilin.hope.bitwiseandmath;
 
 /**
  * Count how many 1 in binary representation of a 32-bit integer.

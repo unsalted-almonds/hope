@@ -1,4 +1,4 @@
-package com.shilin.hope.bitwise;
+package com.shilin.hope.bitwiseandmath;
 
 /**
  * Given two 32-bit numbers, N and M, and two bit positions, i and j. Write a

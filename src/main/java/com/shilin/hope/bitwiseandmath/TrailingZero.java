@@ -1,4 +1,4 @@
-package com.shilin.hope.bitwise;
+package com.shilin.hope.bitwiseandmath;
 
 /**
  * Write an algorithm which computes the number of trailing zeros in n
