@@ -54,4 +54,22 @@ public class JumpGame {
 
 		return true;
 	}
+	
+	// version 1: Dynamic Programming
+	// 这个方法，复杂度是 O(n^2) 可能会超时，但是依然需要掌握。
+    public boolean canJumpDp(int[] A) {
+        boolean[] can = new boolean[A.length];
+        can[0] = true;
+        
+        for (int i = 1; i < A.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (can[j] && j + A[j] >= i) {
+                    can[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return can[A.length - 1];
+    }
 }
