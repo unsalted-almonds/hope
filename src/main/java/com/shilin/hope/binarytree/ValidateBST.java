@@ -60,7 +60,7 @@ public class ValidateBST {
             return false;
         }
         
-        return isValidBSTHelper(root.left, min, Math.min(new Long(root.val), max)) && isValidBSTHelper(root.right, Math.max(new Long(root.val), min), max);
+        return isValidBSTHelper(root.left, min, new Long(root.val)) && isValidBSTHelper(root.right, new Long(root.val), max);
 
     }
 }
