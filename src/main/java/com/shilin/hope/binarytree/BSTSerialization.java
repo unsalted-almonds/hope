@@ -3,9 +3,9 @@ package com.shilin.hope.binarytree;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class BSTSerialization {
+	private static final String EMPTY_NODE_VAL = "#"; 
 	
 	public static void main(String args[]) {
 		
@@ -24,90 +24,54 @@ public class BSTSerialization {
 		System.out.println(test.serialize(test.deserialize("1,2,#,#,3,4,#,#,5,#,#")));
 	}
 	
-	private static final String EMPTY_NODE_VAL = "#"; 
-	
+	private void serializeHelper(TreeNode root, StringBuffer sb) {
+		if (root == null) {
+			sb.append(",").append(EMPTY_NODE_VAL);
+			return;
+		}
+		
+		sb.append(",").append(root.val);
+		serializeHelper(root.left, sb);
+		serializeHelper(root.right, sb);
+	}
+		
     /**
      * This method will be invoked first, you should design your own algorithm 
      * to serialize a binary tree which denote by a root node to a string which
      * can be easily deserialized by your own "deserialize" method later.
      */
     public String serialize(TreeNode root) {
-        // write your code here
-    	/*
-        StringBuffer sb = new StringBuffer();
-        
+        // write your code here    
         if (root == null) {
-            return sb.toString();
+            return "";
         }
         
-        // perform a level traversal (bfs)
-        Queue<TreeNode> level = new LinkedList<TreeNode>();
-        level.offer(root);
-        String nullString = "null";
-        
-        Boolean hasNode = true;
-        
-        while (hasNode) {
-        	hasNode = false;
-            Queue<TreeNode> children = new LinkedList<TreeNode>();
-            while (!level.isEmpty()) {
-                TreeNode parent = level.poll();
-                sb.append(",");
-                if (parent == null) {
-                    sb.append(nullString);
-                    children.offer(null);
-                    children.offer(null);
-                } else {
-                    sb.append(parent.val);
-                    children.offer(parent.left);
-                    children.offer(parent.right);
-                    if (parent.left != null || parent.right!=null) {
-                    	hasNode = true;
-                    }
-                }
-            }
-            level = children;
-        }
-        
-        return sb.substring(1);
-        */
+    	StringBuffer sb = new StringBuffer("");
+    	serializeHelper(root, sb);
     	
-        StringBuffer sb = new StringBuffer("");
-        
-        if (root == null) {
-            return sb.toString();
-        }
-        
-        Stack<TreeNode> stackFrame = new Stack<TreeNode>();
-        
-        stackFrame.push(root);
-        
-		while (!stackFrame.isEmpty()) {
-
-			TreeNode stackTop = stackFrame.pop();
-			sb.append(",");
-			if (stackTop == null) {
-				sb.append(EMPTY_NODE_VAL);
-			} else {
-				sb.append(stackTop.val);
-
-				if (stackTop.right != null) {
-					stackFrame.push(stackTop.right);
-				} else {
-					stackFrame.push(null);
-				}
-				
-				if (stackTop.left != null) {
-					stackFrame.push(stackTop.left);
-				} else {
-					stackFrame.push(null);
-				}
-			}
-
-		}
-        
-        return sb.substring(1);
-        
+    	return sb.substring(1);
+    }
+    
+    private void deserializeHelper(TreeNode root, Queue<String> values) {
+    	if (root == null) {
+    		return;
+    	}
+    	
+    	String leftValue = values.poll();
+    	if (leftValue.equals(EMPTY_NODE_VAL)) {
+    		deserializeHelper(null, values);
+    	} else {
+    		root.left = new TreeNode(Integer.parseInt(leftValue));
+    		deserializeHelper(root.left, values);
+    	}
+    	
+    	String rightValue = values.poll();
+    	if (rightValue.equals(EMPTY_NODE_VAL)) {
+    		deserializeHelper(null, values);
+    	} else {
+    		root.right = new TreeNode(Integer.parseInt(rightValue));
+    		deserializeHelper(root.right, values);
+    	}
     }
     
     /**
@@ -126,74 +90,14 @@ public class BSTSerialization {
     		return null;
     	}
     	
-    	Queue<String> preOrder = new LinkedList<String>(Arrays.asList(data.split(",")));
-    	System.out.println(preOrder);
+    	Queue<String> values = new LinkedList<String>(Arrays.asList(data.split(",")));
     	
-    	TreeNode root = new TreeNode(Integer.parseInt(preOrder.poll()));
-    	TreeNode current = root;
+    	TreeNode root = new TreeNode(Integer.parseInt(values.poll()));
     	
-    	while (!preOrder.isEmpty()) {
-    		String value = preOrder.poll();
-    		
-    		if (!value.equals(EMPTY_NODE_VAL)) {
-    			current.left = new TreeNode(Integer.parseInt(value));
-    			current = current.left;
-    		} else {
-    			value = preOrder.poll();
-    			if (!value.equals(EMPTY_NODE_VAL)) {
-    				current.right = new TreeNode(Integer.parseInt(value));
-    				current = current.right;
-    			} else if (!preOrder.isEmpty()) {
-    				current = new TreeNode(Integer.parseInt(preOrder.poll()));
-    			}
-    		}
-    		
-    	}
+    	deserializeHelper(root, values);
     	
     	return root;
-    	/*
-        TreeNode result = null;
-        
-        if (data.length() == 0) {
-            return result;
-        }
-        
-        String[] tokens = data.split(",");
-        System.out.println(Arrays.toString(tokens));
-        result = new TreeNode(Integer.parseInt(tokens[0]));
-        Integer i = 1;
-        Queue<TreeNode> parent = new LinkedList<TreeNode>();
-        parent.offer(result);
-        
-        while (i < tokens.length) {
-            Queue<TreeNode> children = new LinkedList<TreeNode>();
-            while (!parent.isEmpty()) {
-                TreeNode node = parent.poll();
-                if (node == null) {
-                    i = i + 2;
-                    break;
-                }
-                if (tokens[i].equals("null")) {
-                    children.offer(null);
-                } else {
-                    node.left = new TreeNode(Integer.parseInt(tokens[i])); 
-                    children.offer(node.left);
-                }
-                i++;
-                
-                if (tokens[i].equals("null")) {
-                    children.offer(null);
-                } else {
-                    node.right = new TreeNode(Integer.parseInt(tokens[i])); 
-                    children.offer(node.right);
-                }
-                i++;
-            }
-            parent = children;
-            
-        }
-        return result;
-        */
+
     }
     
 	public class TreeNode {
