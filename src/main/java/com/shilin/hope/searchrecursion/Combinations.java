@@ -1,4 +1,4 @@
-package com.shilin.hope.serachrecursion;
+package com.shilin.hope.searchrecursion;
 
 import java.util.ArrayList;
 import java.util.List;
