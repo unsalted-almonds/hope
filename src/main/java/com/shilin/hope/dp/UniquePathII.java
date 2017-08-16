@@ -1,4 +1,4 @@
-package com.shilin.dp;
+package com.shilin.hope.dp;
 
 /**
  * Follow up for "Unique Paths":
