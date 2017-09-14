@@ -23,17 +23,36 @@ public class WordBreak {
 	 */
 	public boolean wordBreak(String s, Set<String> dict) {
 		// write your code here
-		
-		if (s == null || dict == null || s.length() == 0){
+		if (s == null || dict == null) {
 			return false;
 		}
-		
-		int lastSpace = 0;
-		
-		for (int i = 0; i < s.length(); i++){
-			
+
+		int maxDictLength = maxWordLength(dict);
+		boolean[] solution = new boolean[s.length() + 1];
+
+		solution[0] = true;
+
+		for (int i = 1; i < solution.length; i++) {
+			String substr = "";
+			for (int j = i; j > 0 && substr.length() < maxDictLength; j--) {
+				substr = s.charAt(j - 1) + substr;
+				if (solution[j - 1] && dict.contains(substr)) {
+					solution[i] = true;
+					break;
+				}
+			}
 		}
-		
-		return false;
+
+		return solution[s.length()];
+	}
+
+	private int maxWordLength(Set<String> dict) {
+		int result = 0;
+		for (String word : dict) {
+			if (word.length() > result) {
+				result = word.length();
+			}
+		}
+		return result;
 	}
 }
