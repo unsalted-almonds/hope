@@ -76,7 +76,7 @@ public class KthSmallestSortedMatrix {
 	}
 
 	private static class ElementComparator implements Comparator<Element> {
-		@Override
+		//@Override
 		public int compare(Element a, Element b) {
 			// this can just be
 			// return a.getValue() - b.getValue();
