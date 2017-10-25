@@ -2,100 +2,79 @@ package com.shilin.hope.array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
- * Given an array S of n integers, are there elements a, b, c in S such that a +
- * b + c = 0? Find all unique triplets in the array which gives the sum of zero.
- * 
+ * Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in
+ * the array which gives the sum of zero.
+ * <p>
  * Example For example, given array S = {-1 0 1 2 -1 -4}, A solution set is:
- * 
+ * <p>
  * (-1, 0, 1) (-1, -1, 2)
- * 
- * @author Shilin_Gan
  *
+ * @author Shilin_Gan
  */
 public class ThreeSum {
 
-	// pay attention to how calculation is reduced by checking for duplicates
-	// this needs to be thought through
+    // pay attention to how calculation is reduced by checking for duplicates
+    // this needs to be thought through
 
-	public static void main(String args[]) {
 
-		System.out.println(new ThreeSum().threeSum(new int[] { -1, 1, 0 }));
+    /**
+     * @param numbers : Give an array numbers of n integer
+     * @return : Find all unique triplets in the array which gives the sum of zero.
+     */
+    public List<List<Integer>> threeSum(int[] numbers) {
+        // write your code here
+        List<List<Integer>> result = new ArrayList<>();
 
-	}
+        if (numbers == null || numbers.length < 3) {
+            return result;
+        }
 
-	/**
-	 * @param numbers
-	 *            : Give an array numbers of n integer
-	 * @return : Find all unique triplets in the array which gives the sum of
-	 *         zero.
-	 */
-	public ArrayList<ArrayList<Integer>> threeSum(int[] numbers) {
-		// write your code here
+        Arrays.sort(numbers);
 
-		// [-1 0 1 2 -1 -4]
-		// n!/(3!*(n-3)!) -> n * n - 1 * n-2 -> n^3
+        int p1 = 0;
+        int p2 = 1;
+        int p3 = numbers.length - 1;
 
-		ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+        // move p1 till only three elements left
+        while (p1 < numbers.length - 2) {
+            p2 = p1 + 1;
+            p3 = numbers.length - 1;
 
-		if (numbers == null || numbers.length < 3) {
-			return ans;
-		}
+            while (p2 < p3) {
 
-		Arrays.sort(numbers);
+                int sum = numbers[p1] + numbers[p2] + numbers[p3];
 
-		for (int i = 0; i < numbers.length; i++) {
+                if (sum == 0) {
+                    result.add(new ArrayList<Integer>(Arrays.asList(numbers[p1], numbers[p2], numbers[p3])));
+                    // skip same
+                    p2++;
+                    while (p2 < p3 && numbers[p2] == numbers[p2 - 1]) {
+                        p2++;
+                    }
+                    p3--;
+                    while (p2 < p3 && numbers[p3] == numbers[p3 + 1]) {
+                        p3--;
+                    }
 
-			// this situation can be skipped as all possible combinations have
-			// been explored with last iteration
-			// this skip may improve algorithm in real life substantially
-			if (i > 0 && numbers[i] == numbers[i - 1]) {
-				continue;
-			}
+                } else if (sum < 0) {
+                    // increase p2
+                    p2++;
+                } else {
+                    // decrease p3
+                    p3--;
+                }
+            }
 
-			int j = i + 1;
-			int k = numbers.length - 1;
+            p1++;
+            while (p1 < numbers.length && numbers[p1] == numbers[p1 - 1]) {
+                p1++;
+            }
+        }
 
-			while (j < k) {
-				int sum = numbers[i] + numbers[j] + numbers[k];
+        return result;
 
-				if (sum == 0) {
-
-					ans.add(new ArrayList<Integer>(Arrays.asList(numbers[i], numbers[j], numbers[k])));
-					k--;
-					j++;
-
-					// skip duplicate pairs
-					while (j < k && numbers[k] == numbers[k + 1]) {
-						k--;
-					}
-					// skip duplicate pairs
-					while (j < k && numbers[j] == numbers[j - 1]) {
-						j++;
-					}
-
-				} else if (sum > 0) {
-					k--;
-					/*
-					 * it's ok to not skip since it doesn't really improve the
-					 * algorithm while (j < k && numbers[k] == numbers[k+1]){
-					 * k--; }
-					 */
-				} else {
-					j++;
-					/*
-					 * it's ok to not skip since it doesn't really improve the
-					 * algorithm while (j < k && numbers[j] == numbers[j-1]){
-					 * j++; }
-					 */
-				}
-
-			}
-
-		}
-
-		return ans;
-
-	}
+    }
 }
