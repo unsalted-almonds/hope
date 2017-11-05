@@ -31,7 +31,7 @@ public class PermutationsII {
 		}
 
 		Arrays.sort(nums);
-
+		// since there are duplicates, array must be used instead of set
 		boolean[] visited = new boolean[nums.length];
 		helper(result, new ArrayList<Integer>(nums.length), nums, visited);
 
