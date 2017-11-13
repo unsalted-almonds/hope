@@ -18,8 +18,8 @@ public class ItemAssociation {
         String[][] input = {{"itemA", "itemB"}, {"itemB", "itemC"}, {"itemD", "itemE"}};
 
         new ItemAssociation().solution(input);
-
-        input = new String[][]{{"g", "b"}, {"a", "b"}, {"b", "d"}, {"c", "e"}, {"f", "c"}, {"f", "h"}, {"i", "j"}, {"j", "k"}};
+        // works when there are circles
+        input = new String[][]{{"g", "b"}, {"a", "b"}, {"b", "d"}, {"c", "e"}, {"f", "c"}, {"f", "h"}, {"i", "j"}, {"j", "k"}, {"a", "d"}};
         new ItemAssociation().solution(input);
 
     }
