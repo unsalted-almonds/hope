@@ -23,7 +23,6 @@ public class AmazonWarehouse {
 
 
     public Integer[][] solution(Integer[][] points, int n) {
-        Integer[] start = new Integer[]{0, 0};
 
         Comparator<Location> locComparator = new Comparator<Location>() {
             @Override
