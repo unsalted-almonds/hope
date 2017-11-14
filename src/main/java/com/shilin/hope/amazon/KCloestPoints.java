@@ -14,12 +14,12 @@ import java.util.PriorityQueue;
  * Created by Shilin_Gan on 11/14/2017.
  */
 public class KCloestPoints {
-    /*
- * @param points: a list of points
- * @param origin: a point
- * @param k: An integer
- * @return: the k closest points
- */
+    /**
+     * @param points: a list of points
+     * @param origin: a point
+     * @param k:      An integer
+     * @return: the k closest points
+     */
     public Point[] kClosest(Point[] points, Point origin, int k) {
         // write your code here
         if (points == null || points.length == 0 || k <= 0) {
