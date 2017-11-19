@@ -7,9 +7,8 @@ package com.shilin.hope.linkedlist;
  * <p>
  * Given m, n satisfy the following condition: 1 ≤ m ≤ n ≤ length of list.
  * <p>
- * Have you met this question in a real interview? Yes
- * Example
- * Given 1->2->3->4->5->NULL, m = 2 and n = 4, return 1->4->3->2->5->NULL.
+ * Have you met this question in a real interview? Yes Example Given 1->2->3->4->5->NULL, m = 2 and n = 4, return
+ * 1->4->3->2->5->NULL.
  */
 public class ReverseLinkedListII {
 
@@ -32,6 +31,65 @@ public class ReverseLinkedListII {
 
 
         new ReverseLinkedListII().reverseBetween(node1, 2, 3);
+    }
+
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+        // write your code here
+
+        int p1 = 1;
+        int p2 = 1;
+
+        ListNode h = head;
+        ListNode t = head;
+        ListNode beforeH = null;
+        ListNode afterT = null;
+
+        // first move p2
+        while (p2 - p1 < n - m) {
+            t = t.next;
+            afterT = t.next;
+            p2++;
+        }
+
+        // move together
+        while (p1 < m) {
+            beforeH = h;
+            h = h.next;
+            p1++;
+
+            t = t.next;
+            afterT = t.next;
+        }
+
+        ListNode newHead = reverse(h, t);
+
+        h.next = afterT;
+
+        if (beforeH == null) {
+            return newHead;
+        }
+
+        beforeH.next = newHead;
+
+        return head;
+
+    }
+
+    private ListNode reverse(ListNode head, ListNode tail) {
+        ListNode dummy = new ListNode(-1);
+        ListNode current = head;
+        ListNode prev = null;
+        while (current != tail) {
+            ListNode next = current.next;
+            dummy.next = current;
+            dummy.next.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        tail.next = dummy.next;
+
+        return tail;
     }
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
