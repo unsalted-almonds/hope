@@ -25,7 +25,7 @@ public class WindowSum {
         }
 
         // if size is greater than size of input ???
-        // this depends on how it is required 
+        // this depends on how it is required
 
         int sum = 0;
         // construct first window sum
