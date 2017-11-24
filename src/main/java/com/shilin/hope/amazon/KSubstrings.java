@@ -20,20 +20,17 @@ public class KSubstrings {
 
     public List<String> solution(String inputStr, int num) {
 
-        List<String> res = new ArrayList<>();
-
         if (inputStr == null || num > inputStr.length()) {
-            return res;
+            return new ArrayList<>();
         }
 
-        int start = 0, end = 0;
+        int end = 0;
         Map<Character, Integer> seen = new HashMap<>();
         Set<String> resSet = new HashSet<>();
 
         for (int i = 0; i < inputStr.length() - num + 1; i++) {
 
             if (i > 0) {
-                //System.out.println(seen);
                 if ((seen.get(inputStr.charAt(i - 1)) - 1) == 0) {
                     seen.remove(inputStr.charAt(i - 1));
                 } else {

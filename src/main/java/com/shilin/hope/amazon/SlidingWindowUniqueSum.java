@@ -19,6 +19,63 @@ public class SlidingWindowUniqueSum {
     public static void main(String[] args) {
         SlidingWindowUniqueSum test = new SlidingWindowUniqueSum();
         System.out.println(test.slidingWindowUniqueElementsSum(new int[]{27, 14, 60, 87, 37, 53, 100, 18, 51, 37, 14, 57, 22, 95, 50, 83, 41, 43, 36, 48, 52, 97, 16, 46, 75, 24, 47, 13, 40, 40, 48, 45, 56, 58, 77, 3, 78, 60, 31, 27, 40, 53, 57, 29, 30, 65, 37, 77, 1, 40, 89, 100, 50, 49, 100, 51, 22, 66, 33, 33, 70, 36, 64, 70, 11, 27, 57, 77, 17, 28, 62, 70, 32, 88, 12, 47, 69, 30, 93, 3, 47, 69, 64, 88, 7, 40, 38, 5, 23, 4, 58, 97, 19, 55, 17, 23}, 21));
+
+        System.out.println(test.solution(new int[]{27, 14, 60, 87, 37, 53, 100, 18, 51, 37, 14, 57, 22, 95, 50, 83, 41, 43, 36, 48, 52, 97, 16, 46, 75, 24, 47, 13, 40, 40, 48, 45, 56, 58, 77, 3, 78, 60, 31, 27, 40, 53, 57, 29, 30, 65, 37, 77, 1, 40, 89, 100, 50, 49, 100, 51, 22, 66, 33, 33, 70, 36, 64, 70, 11, 27, 57, 77, 17, 28, 62, 70, 32, 88, 12, 47, 69, 30, 93, 3, 47, 69, 64, 88, 7, 40, 38, 5, 23, 4, 58, 97, 19, 55, 17, 23}, 21));
+
+    }
+
+    public int solution(int[] nums, int k) {
+        int res = 0;
+
+        if (nums == null || nums.length < k) {
+            return res;
+        }
+
+        int unique = 0;
+        Map<Integer, Integer> seen = new HashMap<>();
+
+        // init
+        for (int i = 0; i < k; i++) {
+            if (seen.containsKey(nums[i])) {
+                if (seen.get(nums[i]) == 1) {
+                    unique--;
+                }
+                seen.put(nums[i], seen.get(nums[i]) + 1);
+            } else {
+                seen.put(nums[i], 1);
+                unique++;
+            }
+        }
+
+        res += unique;
+
+        for (int i = 1; i < nums.length - k + 1; i++) {
+
+            seen.put(nums[i - 1], seen.get(nums[i - 1]) - 1);
+            if (seen.get(nums[i - 1]) == 0) {
+                seen.remove(nums[i - 1]);
+                unique--;
+            } else if (seen.get(nums[i - 1]) == 1) {
+                unique++;
+            }
+
+            int tmp = i + k - 1;
+
+            if (seen.containsKey(nums[tmp])) {
+                if (seen.get(nums[tmp]) == 1) {
+                    unique--;
+                }
+                seen.put(nums[tmp], seen.get(nums[tmp]) + 1);
+            } else {
+                seen.put(nums[tmp], 1);
+                unique++;
+            }
+
+            res += unique;
+
+        }
+
+        return res;
     }
 
     /*
