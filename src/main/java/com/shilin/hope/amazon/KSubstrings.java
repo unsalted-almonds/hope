@@ -1,9 +1,6 @@
 package com.shilin.hope.amazon;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -15,9 +12,59 @@ public class KSubstrings {
         List<String> res = test.solution("awaglknagawunagwkwagl", 4);
 
         System.out.println(res);
+
+        res = test.solution2("awaglknagawunagwkwagl", 4);
+
+        System.out.println(res);
     }
 
     public List<String> solution(String inputStr, int num) {
+
+        List<String> res = new ArrayList<>();
+
+        if (inputStr == null || num > inputStr.length()) {
+            return res;
+        }
+
+        int start = 0, end = 0;
+        Map<Character, Integer> seen = new HashMap<>();
+        Set<String> resSet = new HashSet<>();
+
+        for (int i = 0; i < inputStr.length() - num + 1; i++) {
+
+            if (i > 0) {
+                //System.out.println(seen);
+                if ((seen.get(inputStr.charAt(i - 1)) - 1) == 0) {
+                    seen.remove(inputStr.charAt(i - 1));
+                } else {
+                    seen.put(inputStr.charAt(i - 1), seen.get(inputStr.charAt(i - 1)) - 1);
+                }
+            }
+
+            while (seen.size() < num) {
+
+                if (end >= inputStr.length()) {
+                    return new ArrayList<>(resSet);
+                }
+                if (seen.containsKey(inputStr.charAt(end))) {
+                    seen.put(inputStr.charAt(end), seen.get(inputStr.charAt(end)) + 1);
+                } else {
+                    seen.put(inputStr.charAt(end), 1);
+                }
+                end++;
+            }
+
+            if (end - i == num) {
+                resSet.add(inputStr.substring(i, end));
+            }
+
+        }
+
+        return new ArrayList<>(resSet);
+    }
+
+    // brute force
+    public List<String> solution2(String inputStr, int num) {
 
         if (num > inputStr.length()) {
             return new ArrayList<>();

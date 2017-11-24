@@ -75,7 +75,7 @@ public class TagList {
         int tmpEnd = end;
 
         // use first window to keep searching
-        while (tmpStart < availableTagList.size() && tmpEnd < availableTagList.size()) {
+        while (tmpEnd < availableTagList.size()) {
 
             String startTag = availableTagList.get(tmpStart);
             // move start forward
