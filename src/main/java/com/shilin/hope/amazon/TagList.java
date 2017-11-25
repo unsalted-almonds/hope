@@ -12,6 +12,11 @@ public class TagList {
 
         System.out.println(res);
 
+        res = test.solution3(Arrays.asList("made", "in", "spain"), Arrays.asList("made", "weather", "forecast", "says", "that", "made", "rain", "in", "spain", "stays"));
+
+        System.out.println(res);
+
+
         res = test.solution(Arrays.asList("2abc", "bcd", "cab"), Arrays.asList("dbc", "2abc", "cab", "bcd", "bcb"));
 
         System.out.println(res);
@@ -19,9 +24,73 @@ public class TagList {
         res = test.solution(Arrays.asList("in", "the", "spain"), Arrays.asList("the", "spain", "that", "the", "rain", "in", "spain", "stays", "forecast", "in", "the"));
 
         System.out.println(res);
+
+        res = test.solution3(Arrays.asList("in", "the", "spain"), Arrays.asList("the", "spain", "that", "the", "rain", "in", "spain", "stays", "forecast", "in", "the"));
+
+        System.out.println(res);
     }
 
+    public List<Integer> solution3(List<String> targetList, List<String> availableTagList) {
+
+        List<Integer> res = new ArrayList<>();
+
+        if (targetList == null || availableTagList == null || targetList.size() > availableTagList.size()) {
+            return res;
+        }
+
+        int len = Integer.MAX_VALUE;
+        int end = Integer.MIN_VALUE;
+        int start = Integer.MIN_VALUE;
+        int tmpEnd = 0;
+        int tmpStart = 0;
+
+        Map<String, Integer> seen = new HashMap<>();
+        Set<String> targetSet = new HashSet<>(targetList);
+
+        for (int i = 0; i < availableTagList.size(); i++) {
+            if (i > 0) {
+                String last = availableTagList.get(i - 1);
+                if (seen.containsKey(last)) {
+                    seen.put(last, seen.get(last) - 1);
+                    if (seen.get(last) == 0) {
+                        seen.remove(last);
+                    }
+                }
+            }
+
+            // extend end
+            while (seen.size() != targetSet.size()) {
+                if (tmpEnd == availableTagList.size()) {
+                    if (start == Integer.MIN_VALUE || end == Integer.MIN_VALUE) {
+                        return Arrays.asList(0);
+                    }
+                    return Arrays.asList(start, end);
+                }
+                String str = availableTagList.get(tmpEnd);
+                if (targetSet.contains(str)) {
+                    if (seen.containsKey(str)) {
+                        seen.put(str, seen.get(str) + 1);
+                    } else {
+                        seen.put(str, 1);
+                    }
+                }
+                tmpEnd++;
+            }
+
+            if (tmpEnd - i < len) {
+                len = tmpEnd - i;
+                start = i;
+                end = tmpEnd - 1;
+            }
+
+        }
+
+        return Arrays.asList(start, end);
+    }
+
+
     // target list doesn't contain duplicate tags
+    // this solution seems to be wrong!
     public List<Integer> solution(List<String> targetList, List<String> availableTagList) {
 
         if (targetList == null || availableTagList == null || targetList.size() == 0 || availableTagList.size() == 0 || targetList.size() > availableTagList.size()) {

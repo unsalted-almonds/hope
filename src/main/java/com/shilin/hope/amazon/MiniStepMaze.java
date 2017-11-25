@@ -60,7 +60,7 @@ public class MiniStepMaze {
         return res;
     }
 
-
+    // for using bfs for shortest path, once find the target, the effort is shortest path
     private int helper(int[] start, int[] target, int[][] maze) {
         Queue<int[]> bfsQueue = new LinkedList<>();
         boolean[][] seen = new boolean[maze.length][maze[0].length];
