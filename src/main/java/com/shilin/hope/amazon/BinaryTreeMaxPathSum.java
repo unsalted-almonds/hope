@@ -10,6 +10,8 @@ public class BinaryTreeMaxPathSum {
  * @param root: The root of binary tree.
  * @return: An integer
  */
+    // need an external variable to record result
+    // because in the recursive call, the return value is not necessarily the result
     int max = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
