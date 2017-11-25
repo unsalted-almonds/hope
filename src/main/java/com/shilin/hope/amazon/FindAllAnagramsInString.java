@@ -25,6 +25,8 @@ public class FindAllAnagramsInString {
      * @param p a non-empty string
      * @return a list of index
      */
+
+    // try using window to do this one
     public List<Integer> findAnagrams(String s, String p) {
 
         List<Integer> result = new ArrayList<>();

@@ -74,6 +74,7 @@ public class CommonManager {
         int i = path1.size() - 1;
         int j = path2.size() - 1;
 
+        // this doesn't look right, should be going from top to bottom
         while (path1.get(i) != path2.get(j)) {
             i--;
             j--;
