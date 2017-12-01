@@ -32,4 +32,3 @@ Output
 
 */
 
-select id, month from employee group by id, month having
