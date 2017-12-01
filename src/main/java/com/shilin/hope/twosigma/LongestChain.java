@@ -9,14 +9,16 @@ public class LongestChain {
 
     public static void main(String[] args) {
         LongestChain test = new LongestChain();
-        int res = test.logestChain(new String[]{"a", "b", "ba", "bca", "bda", "bdca"});
+        int res = test.longestChain(new String[]{"a", "b", "ba", "bca", "bda", "bdca"});
         System.out.println(res);
 
-        System.out.println("a".substring(0,0));
+        res = test.longestChain(new String[]{"qrty", "abc", "qry", "ry", "a", "qerty", "r", "def", "qwwerty", "qwerty", "bdca"});
+        System.out.println(res);
+
     }
 
 
-    public int logestChain(String[] w) {
+    public int longestChain(String[] w) {
         int res = 0;
         if (w == null || w.length == 0) {
             return res;
@@ -38,7 +40,7 @@ public class LongestChain {
         return res;
     }
 
-    private int helper(String str, Set<String> lib, Map<String, Integer> record){
+    private int helper(String str, Set<String> lib, Map<String, Integer> record) {
         if (!lib.contains(str)) {
             return 0;
         }
