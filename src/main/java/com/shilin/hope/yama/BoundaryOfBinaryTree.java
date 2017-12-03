@@ -107,10 +107,12 @@ public class BoundaryOfBinaryTree {
             leaves.remove(leaves.size() - 1);
         }
         res.addAll(leaves);
+//
+//        for (int i = right.size() - 1; i >= 0; i--) {
+//            res.add(right.get(i));
+//        }
 
-        for (int i = right.size() - 1; i >= 0; i--) {
-            res.add(right.get(i));
-        }
+        res.addAll(right);
 
         return res;
     }
@@ -151,9 +153,31 @@ public class BoundaryOfBinaryTree {
 
         return res;
     }
+    // bottom up
+    private List<Integer> getRight(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        // keep pushing
+        TreeNode current = root.right;
+        while (current != null) {
+            stack.push(current);
+            if (current.right != null) {
+                current = current.right;
+            } else {
+                current = current.left;
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            res.add(stack.pop().val);
+        }
+
+        return res;
+    }
 
     // right boundary without root
-    private List<Integer> getRight(TreeNode root) {
+    // this is top-bottom
+    private List<Integer> getRight2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         root = root.right;
 
