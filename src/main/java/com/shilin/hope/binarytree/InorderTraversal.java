@@ -32,7 +32,7 @@ public class InorderTraversal {
         Stack<TreeNode> inorder = new Stack<>();
 
         TreeNode current = root;
-
+        // key is to push onto stack only when it's not null
         while (!inorder.isEmpty() || current != null) {
             while (current != null) {
                 inorder.push(current);
