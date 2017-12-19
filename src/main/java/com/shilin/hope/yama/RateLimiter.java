@@ -1,6 +1,9 @@
 package com.shilin.hope.yama;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * [LeetCode] Logger Rate Limiter 记录速率限制器
@@ -72,7 +75,7 @@ public class RateLimiter {
 
         int newHead = timestamp - limiter + 1;
         while (bucketHead < newHead) {
-            Set<String> bucket = timeBucketArray[bucketHead % 10];
+            Set<String> bucket = timeBucketArray[bucketHead % limiter];
             if (bucket != null) {
                 lastTenSecondsPrinted.removeAll(bucket);
             }
@@ -85,12 +88,12 @@ public class RateLimiter {
 
         lastTenSecondsPrinted.add(log);
 
-        if (timeBucketArray[timestamp % 10] == null) {
+        if (timeBucketArray[timestamp % limiter] == null) {
             Set<String> bucket = new HashSet<>();
             bucket.add(log);
-            timeBucketArray[timestamp % 10] = bucket;
+            timeBucketArray[timestamp % limiter] = bucket;
         } else {
-            timeBucketArray[timestamp % 10].add(log);
+            timeBucketArray[timestamp % limiter].add(log);
         }
 
         return true;
