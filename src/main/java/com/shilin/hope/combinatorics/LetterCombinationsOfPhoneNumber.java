@@ -33,6 +33,9 @@ public class LetterCombinationsOfPhoneNumber {
         return result;
     }
 
+    // this is not necessary to apply the "common" dfs template
+    // this is not a good solution
+    // refer com.shilin.hope.yama
     private void helper(String digits, List<String> result, String solution, int start) {
         if (solution.length() == digits.length()) {
             result.add(solution);
