@@ -23,12 +23,7 @@ import java.util.Set;
  * @author Shilin_Gan
  */
 public class WordLadder {
-    /**
-     * @param start, a string
-     * @param end,   a string
-     * @param dict,  a set of string
-     * @return an integer
-     */
+
 
     public static void main(String[] args) {
         WordLadder test = new WordLadder();
@@ -51,6 +46,13 @@ public class WordLadder {
 
     }
 
+    /**
+     * dfs will time out, bfs is the most efficient solution， dfs will goes to every depth, bfs will stop once shortest found
+     * @param start
+     * @param end
+     * @param dict
+     * @return
+     */
 
     // "a", "c", ["a","b","c"]
     // "hit", "cog", ["hot","dot","dog","lot","log"]
