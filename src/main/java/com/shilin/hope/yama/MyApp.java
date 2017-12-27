@@ -23,5 +23,7 @@ public class MyApp {
         }
 
         System.out.println(preorder);
+
+        Arrays.asList(1,2,3);
     }
 }
