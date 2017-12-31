@@ -8,6 +8,8 @@ public class MyApp {
 
     public static void main(String args[]) {
 
+        System.out.println(1 << 0);
+
         List<Integer> strList = Arrays.asList(new Integer[]{22,13,3,4});
 
         System.out.println(strList);
