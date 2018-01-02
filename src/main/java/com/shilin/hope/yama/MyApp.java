@@ -1,31 +1,16 @@
 package com.shilin.hope.yama;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class MyApp {
 
     public static void main(String args[]) {
 
-        System.out.println(1 << 0);
+        String input = "x+5-3+x=6+x-2" ;
 
-        List<Integer> strList = Arrays.asList(new Integer[]{22,13,3,4});
+        String[] token = input.split("\\+|-|=");
 
-        System.out.println(strList);
+        System.out.println(Arrays.toString(token));
 
-        String data = strList.toString();
-        data = data.substring(1, data.length() - 1);
-
-        String[] preorderString = data.split("\\s*,\\s*");
-        List<Integer> preorder = new ArrayList<>();
-
-        for (String str : preorderString) {
-            preorder.add(Integer.valueOf(str));
-        }
-
-        System.out.println(preorder);
-
-        Arrays.asList(1,2,3);
     }
 }
