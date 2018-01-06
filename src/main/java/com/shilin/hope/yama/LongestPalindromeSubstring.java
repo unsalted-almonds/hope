@@ -32,7 +32,8 @@ public class LongestPalindromeSubstring {
             }
         }
 
-        // up to bottom is easier
+        // up bottom is very difficult to write 
+        // bottom up is easier
         for (int i = size - 3; i >= 0; i--) {
             for (int j = i + 2; j < size; j++) {
                 if (match[i + 1][j - 1] && s.charAt(i) == s.charAt(j)) {
