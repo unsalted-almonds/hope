@@ -32,7 +32,7 @@ public class LongestPalindromeSubstring {
             }
         }
 
-        // up bottom is very difficult to write 
+        // up bottom is very difficult to write
         // bottom up is easier
         for (int i = size - 3; i >= 0; i--) {
             for (int j = i + 2; j < size; j++) {

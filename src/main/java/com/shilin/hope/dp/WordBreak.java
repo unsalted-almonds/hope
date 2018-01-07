@@ -3,56 +3,49 @@ package com.shilin.hope.dp;
 import java.util.Set;
 
 /**
- * Given a string s and a dictionary of words dict, determine if s can be break
- * into a space-separated sequence of one or more dictionary words. Given s =
- * "lintcode", dict = ["lint", "code"].
- * 
+ * Given a string s and a dictionary of words dict, determine if s can be break into a space-separated sequence of one
+ * or more dictionary words. Given s = "lintcode", dict = ["lint", "code"].
+ * <p>
  * Return true because "lintcode" can be break as "lint code".
- * 
+ * <p>
  * lintcode1 -> false
- * 
- * @author Shilin
  *
+ * @author Shilin
  */
 public class WordBreak {
-	/**
-	 * @param s:
-	 *            A string s
-	 * @param dict:
-	 *            A dictionary of words dict
-	 */
-	public boolean wordBreak(String s, Set<String> dict) {
-		// write your code here
-		if (s == null || dict == null) {
-			return false;
-		}
+    /**
+     * @param s:    A string s
+     * @param dict: A dictionary of words dict
+     */
+    public boolean wordBreak(String s, Set<String> dict) {
 
-		int maxDictLength = maxWordLength(dict);
-		boolean[] solution = new boolean[s.length() + 1];
+        if (s == null || dict == null) {
+            return false;
+        }
 
-		solution[0] = true;
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        int maxLen = maxWordLength(dict);
+        for (int i = 1; i < dp.length; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (i - j > maxLen) break;
+                if (dp[j] && dict.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    continue;
+                }
+            }
+        }
 
-		for (int i = 1; i < solution.length; i++) {
-			String substr = "";
-			for (int j = i; j > 0 && substr.length() < maxDictLength; j--) {
-				substr = s.charAt(j - 1) + substr;
-				if (solution[j - 1] && dict.contains(substr)) {
-					solution[i] = true;
-					break;
-				}
-			}
-		}
+        return dp[dp.length - 1];
+    }
 
-		return solution[s.length()];
-	}
+    private int maxWordLength(Set<String> dict) {
+        int res = 0;
 
-	private int maxWordLength(Set<String> dict) {
-		int result = 0;
-		for (String word : dict) {
-			if (word.length() > result) {
-				result = word.length();
-			}
-		}
-		return result;
-	}
+        for (String str : dict) {
+            res = Math.max(res, str.length());
+        }
+
+        return res;
+    }
 }
