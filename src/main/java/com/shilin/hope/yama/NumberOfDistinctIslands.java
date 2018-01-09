@@ -87,7 +87,6 @@ public class NumberOfDistinctIslands {
                     islands.add(islandData.toString());
                 }
 
-
             }
         }
 

@@ -40,6 +40,58 @@ public class KthLargestInArray {
         return idx;
     }
 
+
+    /**
+     *     public int kthLargestElement(int k, int[] nums) {
+     // write your code here
+
+     int result = Integer.MIN_VALUE;
+
+     if (nums == null || nums.length == 0 || k > nums.length) {
+     return result;
+     }
+
+     int lo = 0, hi = nums.length - 1;
+     int idx = -1;
+
+     while (true) {
+     idx = partition(lo, hi, nums);
+     if (idx > k - 1) {
+     hi = idx - 1;
+     } else if (idx < k - 1) {
+     lo = idx + 1;
+     } else {
+     return nums[idx];
+     }
+     }
+
+     }
+
+     private int partition(int lo, int hi, int[] nums) {
+     int pivot = hi;
+     int idx = lo;
+
+     for (int i = lo; i < hi; i++) {
+     if (nums[i] > nums[pivot]) {
+     swap(nums, i, idx);
+     idx++;
+     }
+     }
+
+     swap(nums, idx, pivot);
+     return idx;
+     }
+
+     private void swap(int[] nums, int a, int b) {
+     int tmp = nums[a];
+     nums[a] = nums[b];
+     nums[b] = tmp;
+     }
+     * @param nums
+     * @param k
+     * @return
+     */
+
     public int findKthLargest2(int[] nums, int k) {
         return quickSelect(nums, 0, nums.length - 1, k);
     }

@@ -31,6 +31,7 @@ public class TinyUrl {
             decimal = decimal / 36;
         }
         shortToLong.put(sb.toString(), longUrl);
+        longToShort.put(longUrl, sb.toString());
         return sb.toString();
     }
 

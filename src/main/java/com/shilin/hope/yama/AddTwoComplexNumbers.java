@@ -36,6 +36,7 @@ public class AddTwoComplexNumbers {
         return "" + resNumber + "+" + resICoefficient + "i";
     }
 
+    // or just do Integer.valueOf(s)
     private int stringToInteger(String str) {
         char[] strArr = str.toCharArray();
         boolean negative = false;

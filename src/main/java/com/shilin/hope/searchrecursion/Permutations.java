@@ -1,7 +1,6 @@
 package com.shilin.hope.searchrecursion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class Permutations {
 			return result;
 		}
 
-		Arrays.sort(nums);
+		//Arrays.sort(nums);
 
 		boolean[] visited = new boolean[nums.length];
 
