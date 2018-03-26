@@ -1,5 +1,7 @@
 package com.shilin.newlife;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 
 public class MyApp {
@@ -20,6 +22,10 @@ public class MyApp {
 
         //System.out.println(context.execute(new DummyDto()));
         //context.execute(new DummyDto());
+
+        Set<?> wildcardSet = new HashSet<>();
+
+
 
     }
 }
